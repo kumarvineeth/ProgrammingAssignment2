@@ -25,13 +25,19 @@ makeCacheMatrix <- function(x = matrix()) {
 ## This function implements the makeCacheMatrix() function and demonstrates
 ## the cache facility facilitated by the R lexically scoping provison
 cacheSolve <- function(x, ...) {
-  i <- x$getinverse()
+  i <- x$getInv()
   if (!is.null(i)) {
     message("retrieving cached data...")
     return(i)
   }
   data <- x$get()
   i <- solve(data, ...)
-  x$setinverse(i)
+  x$setInv(i)
   i
 }
+
+# usecases:
+# U <- matrix(1:4,2,2)
+# U1 <- makeCacheMatrix(U)
+# cacheSolve(U1)
+# end of usecases
